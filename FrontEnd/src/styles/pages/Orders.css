@@ -1,0 +1,598 @@
+/* ==========================================================================
+   ORDERS PAGE - ULTRA CLEAN PREMIUM THEME
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+.orders-page-wrapper.white-theme {
+  min-height: 100vh;
+  background-color: #f5f7fa;
+  /* Very soft cool gray */
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  color: #1a1a1a;
+  padding-bottom: 80px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* --- Layout --- */
+
+.orders-main-content {
+  max-width: 900px;
+  /* Focused reading width */
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.orders-header {
+  margin-bottom: 24px;
+}
+
+.orders-header h1 {
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: #111;
+  margin: 0;
+}
+
+/* --- Search & Filter Row (Perfect Size & Responsive) --- */
+
+.orders-search-filter-row {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+  align-items: center;
+}
+
+.search-bar-container {
+  flex: 1;
+  /* Fills remaining space */
+  display: flex;
+  align-items: center;
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 0 16px;
+  height: 48px;
+  /* Fixed robust height */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+  transition: all 0.2s ease;
+}
+
+.search-bar-container:focus-within {
+  border-color: #111;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transform: translateY(-1px);
+}
+
+.search-icon {
+  font-size: 18px;
+  color: #999;
+  margin-right: 12px;
+  flex-shrink: 0;
+}
+
+.search-bar-container input {
+  border: none;
+  background: transparent;
+  width: 100%;
+  font-size: 15px;
+  color: #111;
+  outline: none;
+  font-weight: 500;
+}
+
+.filter-btn {
+  height: 48px;
+  /* Matches search bar */
+  padding: 0 20px;
+  background: #111;
+  /* Strong contrast */
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+  /* Never shrink */
+  white-space: nowrap;
+}
+
+.filter-btn:hover {
+  background: #333;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+}
+
+/* --- Ultra Clean Card Design --- */
+
+.ultra-order-card {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 16px;
+  border: 1px solid white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(0, 0, 0, 0.02);
+  cursor: pointer;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.ultra-order-card:hover {
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+  border-color: #f0f0f0;
+}
+
+.card-main-content {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+/* Image Section */
+.card-image-section {
+  flex-shrink: 0;
+}
+
+.img-box {
+  width: 80px;
+  height: 80px;
+  background: #f8f9fa;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #f0f0f0;
+}
+
+.img-box img {
+  width: 90%;
+  height: 90%;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+}
+
+/* Information Section */
+.card-info-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  min-width: 0;
+  /* Important for flex text truncation */
+}
+
+.info-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.product-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: #111;
+  margin: 0;
+  line-height: 1.3;
+  /* Truncate text */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.price-tag-mobile {
+  display: none;
+  /* Desktop hidden */
+  font-weight: 700;
+  font-size: 15px;
+  color: #111;
+}
+
+.info-meta {
+  font-size: 13px;
+  color: #666;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.meta-dot {
+  color: #ccc;
+  font-size: 10px;
+}
+
+.meta-badge {
+  background: #f1f3f5;
+  color: #495057;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* --- Status Enhanced UI --- */
+
+/* Visual Stepper Styles */
+.card-visual-stepper {
+  display: flex;
+  align-items: center;
+  margin: 12px 0 8px 0;
+  /* Spacing */
+  width: 100%;
+  max-width: 350px;
+  /* Limit width */
+}
+
+.stepper-step {
+  display: flex;
+  align-items: center;
+  position: relative;
+  flex: 1;
+  /* Distribute space */
+}
+
+.stepper-step:last-child {
+  flex: 0;
+  /* Last dot doesn't grow */
+  width: auto;
+}
+
+/* Standard Stepper Dots */
+.step-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #e9ecef;
+  z-index: 2;
+  transition: all 0.3s ease;
+}
+
+/* Return Stepper - ICON Dots */
+.step-dot-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #f8f9fa;
+  border: 2px solid #e9ecef;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  font-size: 10px;
+  color: #adb5bd;
+  transition: all 0.3s ease;
+}
+
+/* Return Flow: Requested (RED) */
+.stepper-step.return-requested .step-dot-icon {
+  border-color: #fa5252;
+  background: #fff5f5;
+  color: #fa5252;
+}
+
+/* Return Flow: Confirmed (BLUE) */
+.stepper-step.return-confirmed .step-dot-icon {
+  border-color: #228be6;
+  background: #e7f5ff;
+  color: #228be6;
+}
+
+/* Return Flow: General Completed (Green/Gray) */
+.stepper-step.active .step-dot-icon {
+  border-color: #228be6;
+  color: #228be6;
+}
+
+.stepper-step.active .step-dot {
+  background: #228be6;
+  box-shadow: 0 0 0 3px rgba(34, 139, 230, 0.2);
+}
+
+.stepper-step.completed .step-dot {
+  background: #40c057;
+  /* Green for completed steps */
+  box-shadow: none;
+}
+
+/* Standard Lines */
+.step-line {
+  flex: 1;
+  height: 2px;
+  background: #f1f3f5;
+  margin: 0 4px;
+  position: relative;
+  top: 0px;
+}
+
+.step-line.filled {
+  background: #40c057;
+  /* Green for Delivery Flow */
+}
+
+/* Specific Line colors for Return Flow can be added if needed,
+   but simplistic Green or Blue is often best to show 'progress'.
+   Let's keep green for completion or use Blue for return flow consistency only if requested.
+*/
+.stepper-step.return-requested+.step-line.filled {
+  background: #fa5252;
+  /* Line after Red dot could be red? Keeping simple for now */
+}
+
+.step-label {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 10px;
+  color: #adb5bd;
+  font-weight: 600;
+  white-space: nowrap;
+  opacity: 0;
+  /* Hidden by default to save space */
+  transition: opacity 0.2s;
+}
+
+/* Show label only for current active step or if specifically desired */
+.stepper-step.active .step-label {
+  opacity: 1;
+  color: #228be6;
+}
+
+.stepper-step.completed .step-label {
+  /* Optional: hide completed labels to reduce clutter */
+  opacity: 0;
+}
+
+/* Mobile Stepper Adjustments */
+@media (max-width: 600px) {
+  .card-visual-stepper {
+    max-width: 100%;
+    margin-bottom: 16px;
+  }
+
+  .step-dot {
+    width: 8px;
+    height: 8px;
+  }
+
+  /* Ensure only active label shows on mobile to prevent overlap */
+  .step-label {
+    font-size: 9px;
+  }
+}
+
+.status-enhanced-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+
+.status-pill-icon {
+  display: inline-flex;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1;
+  transition: all 0.2s ease;
+}
+
+.status-pill-icon svg {
+  font-size: 14px;
+}
+
+/* Specific Status Colors */
+.status-pill-icon.delivered {
+  background: #e6fcf5;
+  color: #0ca678;
+  border: 1px solid #c3fae8;
+}
+
+.status-pill-icon.processing,
+.status-pill-icon.shipped {
+  background: #e7f5ff;
+  color: #1c7ed6;
+  border: 1px solid #d0ebff;
+}
+
+.status-pill-icon.return_requested,
+.status-pill-icon.return_confirmed {
+  background: #fff9db;
+  color: #f59f00;
+  border: 1px solid #ffec99;
+}
+
+.status-pill-icon.cancelled {
+  background: #fff5f5;
+  color: #fa5252;
+  border: 1px solid #ffc9c9;
+}
+
+.status-pill-icon.refunded {
+  background: #f3f0ff;
+  color: #7950f2;
+  border: 1px solid #e5dbff;
+}
+
+.delivery-est-text {
+  font-size: 12px;
+  color: #666;
+  font-weight: 500;
+}
+
+/* Action Section (Desktop) */
+.card-action-section {
+  text-align: right;
+  min-width: 100px;
+}
+
+.total-price {
+  font-size: 18px;
+  font-weight: 800;
+  color: #000;
+  margin-bottom: 4px;
+}
+
+.view-details-btn {
+  font-size: 13px;
+  font-weight: 600;
+  color: #228be6;
+  text-decoration: none;
+}
+
+/* --- Empty State --- */
+.empty-state-box {
+  text-align: center;
+  padding: 60px 20px;
+  background: white;
+  border-radius: 16px;
+  border: 1px dashed #e0e0e0;
+}
+
+/* --- Layout --- */
+
+.orders-main-content {
+  max-width: 100%;
+  /* FULL SCREEN REQUEST */
+  width: 100%;
+  margin: 0;
+  padding: 30px 40px;
+  /* Spacious styling */
+  box-sizing: border-box;
+}
+
+/* ... (Header styles remain) ... */
+
+/* --- Search & Filter Row (Perfect Size & Responsive) --- */
+
+.orders-search-filter-row {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 24px;
+  align-items: center;
+  width: 100%;
+}
+
+/* ... (Search bar styles) ... */
+
+.empty-icon {
+  font-size: 40px;
+  color: #ddd;
+  margin-bottom: 16px;
+}
+
+/* --- Responsive Perfection --- */
+
+/* Mobile (max-width: 600px) */
+@media (max-width: 600px) {
+  .orders-main-content {
+    padding: 20px 16px;
+  }
+
+  .orders-header h1 {
+    font-size: 24px;
+  }
+
+  /* Mobile Search: Maximize Space */
+  .orders-search-filter-row {
+    gap: 10px;
+  }
+
+  .search-bar-container {
+    flex: 1;
+    /* Takes all remaining space */
+    min-width: 0;
+    /* Prevents overflow */
+    padding: 0 12px;
+    z-index: 5;
+    /* Ensure clickable */
+  }
+
+  .search-bar-container input {
+    font-size: 16px;
+    /* Stop iOS zoom */
+    width: 100%;
+  }
+
+  /* Filter Button: Icon Only on Mobile */
+  .filter-btn {
+    padding: 0;
+    width: 48px;
+    /* Square button */
+    justify-content: center;
+    min-width: 48px;
+  }
+
+  .filter-btn span {
+    display: none;
+    /* Hide text "Filter" */
+  }
+
+  .filter-btn svg {
+    font-size: 18px;
+    /* Larger icon */
+  }
+
+  /* Mobile Card Layout */
+  .ultra-order-card {
+    padding: 16px;
+  }
+
+  .card-main-content {
+    align-items: flex-start;
+    /* Align top */
+  }
+
+  .img-box {
+    width: 64px;
+    height: 64px;
+  }
+
+  .card-info-section {
+    gap: 4px;
+  }
+
+  .product-name {
+    font-size: 15px;
+    white-space: normal;
+    /* Allow wrap on mobile */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
+  .price-tag-mobile {
+    display: block;
+    /* Show on mobile */
+    margin-left: 8px;
+    white-space: nowrap;
+  }
+
+  .card-action-section {
+    display: none;
+    /* Hide desktop action col */
+  }
+
+  /* Expand status bar on mobile */
+  .mini-progress-track {
+    max-width: 100%;
+    margin-top: 8px;
+  }
+
+  .status-text-row {
+    max-width: 100%;
+  }
+}

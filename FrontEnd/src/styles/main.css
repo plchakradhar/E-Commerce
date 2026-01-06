@@ -1,0 +1,144 @@
+/* main.css - Complete Light Theme CSS System */
+
+/* 1. BASE STYLES */
+@import './base/_variables.css';
+@import './base/_reset.css';
+@import './base/_typography.css';
+@import './base/_globals.css';
+
+/* 2. LAYOUT STYLES */
+@import './layouts/layout.css';
+@import './layouts/grid.css';
+
+/* 3. COMPONENT STYLES */
+@import './components/_components.css';
+
+/* 4. PAGE STYLES */
+@import './pages/_pages.css';
+
+/* 5. UTILITY STYLES */
+@import './utils/_utilities.css';
+@import './utils/_animations.css';
+
+/* ==========================================================================
+   CUSTOM E-COMMERCE STYLES
+   ========================================================================== */
+
+/* Hero Section */
+.hero-section {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  padding: var(--spacing-2xl) 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+
+.hero-title {
+  font-size: var(--font-size-4xl);
+  font-weight: 700;
+  margin-bottom: var(--spacing-lg);
+  color: var(--text-primary);
+}
+
+.hero-subtitle {
+  font-size: var(--font-size-xl);
+  margin-bottom: var(--spacing-2xl);
+  opacity: 0.9;
+  color: var(--text-secondary);
+}
+
+/* Featured Products */
+.featured-products {
+  background: var(--bg-secondary);
+  padding: var(--spacing-2xl) 0;
+}
+
+/* Testimonials */
+.testimonials {
+  background: var(--bg-primary);
+  padding: var(--spacing-2xl) 0;
+}
+
+/* Footer */
+.footer {
+  background: var(--black);
+  color: var(--white);
+  padding: var(--spacing-2xl) 0 var(--spacing-md);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--text-tertiary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
+
+/* Selection Styles */
+::selection {
+  background-color: var(--accent-color);
+  color: var(--white);
+}
+
+::-moz-selection {
+  background-color: var(--accent-color);
+  color: var(--white);
+}
+
+/* Focus Styles for Accessibility */
+:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}
+
+/* Print Styles */
+@media print {
+  * {
+    background: transparent !important;
+    color: black !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+}
+
+/* Responsive Design Enhancements */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: var(--font-size-3xl);
+  }
+
+  .hero-subtitle {
+    font-size: var(--font-size-lg);
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: var(--font-size-2xl);
+  }
+
+  .hero-subtitle {
+    font-size: var(--font-size-base);
+  }
+}

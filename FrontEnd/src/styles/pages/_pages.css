@@ -1,0 +1,10 @@
+/* Import all page styles */
+@import './Home.css';
+@import './Products.css';
+@import './ProductDetail.css';
+@import './Cart.css';
+@import './Checkout.css';
+@import './Orders.css';
+@import './OrderDetails.css';
+@import './Wishlist.css';
+@import './OrderSuccess.css';
