@@ -130,19 +130,19 @@ const ProductCard = ({
         {/* Badges */}
         <div className="product-badges">
           {fileType === 'video' && (
-            <div className="badge video-badge">
+            <div className="product-badge video-badge">
               <FaPlay /> Video
             </div>
           )}
           {hasDiscount && (
-            <div className="badge discount-badge">-{discountPercentage}%</div>
+            <div className="product-badge discount-badge">-{discountPercentage}%</div>
           )}
-          {product.isNew && <div className="badge new-badge">New</div>}
+          {product.isNew && <div className="product-badge new-badge">New</div>}
           {product.stock <= 10 && product.stock > 0 && (
-            <div className="badge low-stock-badge">Low Stock</div>
+            <div className="product-badge low-stock-badge">Low Stock</div>
           )}
           {product.stock === 0 && (
-            <div className="badge out-of-stock-badge">Out of Stock</div>
+            <div className="product-badge out-of-stock-badge">Out of Stock</div>
           )}
         </div>
 

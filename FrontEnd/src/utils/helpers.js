@@ -49,6 +49,15 @@ export const getEstimatedDeliveryDate = (orderDate, status) => {
   return date.toLocaleDateString("en-US", options);
 };
 
+// Format Exact Delivery Date with time
+export const formatExactDeliveryDate = (dateString) => {
+  if (!dateString) return "N/A";
+  const date = new Date(dateString);
+  const datePart = date.toLocaleDateString("en-US", { weekday: 'short', month: 'short', day: 'numeric' });
+  const timePart = date.toLocaleTimeString("en-US", { hour: 'numeric', minute: '2-digit', hour12: true });
+  return `${datePart} at ${timePart}`;
+};
+
 // Generate Verification Code (6 digits)
 export const generateVerificationCode = () => {
   return Math.floor(100000 + Math.random() * 900000).toString();

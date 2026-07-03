@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { FaEye, FaSort } from "react-icons/fa";
+import { FaEye, FaSort, FaFileInvoice } from "react-icons/fa";
 import axios from "axios";
 import OrderDetailsModal from "./modals/OrderDetailsModal";
+import { generatePDFInvoice } from "../../utils/pdfGenerator";
 
 const OrdersManagement = ({ orders, onOrderUpdate }) => {
 
@@ -107,15 +108,26 @@ const OrdersManagement = ({ orders, onOrderUpdate }) => {
                   </select>
                 </td>
                 <td>
-                  <button
-                    className="action-btn view"
-                    onClick={() => {
-                      setSelectedOrder(order);
-                      setShowOrderModal(true);
-                    }}
-                  >
-                    <FaEye />
-                  </button>
+                  <div style={{ display: 'flex', gap: '8px' }}>
+                    <button
+                      className="action-btn view"
+                      title="View Details"
+                      onClick={() => {
+                        setSelectedOrder(order);
+                        setShowOrderModal(true);
+                      }}
+                    >
+                      <FaEye />
+                    </button>
+                    <button
+                      className="action-btn"
+                      title="Download Invoice"
+                      style={{ background: '#4f46e5', color: 'white', border: 'none', borderRadius: '4px', padding: '6px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                      onClick={() => generatePDFInvoice(order)}
+                    >
+                      <FaFileInvoice />
+                    </button>
+                  </div>
                 </td>
               </tr>
             ))}

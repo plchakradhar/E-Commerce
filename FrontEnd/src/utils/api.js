@@ -75,15 +75,7 @@ export const orderAPI = {
 
 // Review APIs
 export const reviewAPI = {
-  add: (reviewData) => {
-    const formData = new FormData();
-    Object.keys(reviewData).forEach(key => {
-      if (key === 'images') {
-        reviewData.images.forEach(image => formData.append('images', image));
-      } else {
-        formData.append(key, reviewData[key]);
-      }
-    });
+  add: (formData) => {
     return api.post('/reviews/add', formData);
   },
   getByProduct: (productId) => api.get(`/reviews/product/${productId}`),

@@ -10,6 +10,7 @@ import { getImageUrl } from "../utils/imageUtils";
 import StarRating from "../components/common/StarRating";
 import '../styles/pages/OrderDetails.css';
 import { formatDate, formatCurrency, getOrderStatusStep } from "../utils/helpers";
+import { generatePDFInvoice } from '../utils/pdfGenerator';
 
 const OrderDetails = () => {
   const navigate = useNavigate();
@@ -119,20 +120,11 @@ const OrderDetails = () => {
   };
 
   const generateInvoice = () => {
-    if (!orderState) return;
     try {
-      const id = orderState.id || orderState.orderId || 'Unknown';
-      const date = formatDate(orderState.createdAt || orderState.orderDate);
-      const name = orderState.shippingInfo?.fullName || 'Customer';
-      const total = typeof orderState.total === 'number' ? orderState.total.toFixed(2) : '0.00';
-      const invoiceContent = `INVOICE #${id}\nDate: ${date}\nName: ${name}\nTotal: ${total}`;
-      const blob = new Blob([invoiceContent], { type: 'text/plain' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `Invoice-${id}.txt`;
-      a.click();
-    } catch (err) { /* ignore */ }
+      generatePDFInvoice(orderState);
+    } catch (error) {
+      console.error("Error generating invoice:", error);
+    }
   };
 
   const handleReturnClick = () => {

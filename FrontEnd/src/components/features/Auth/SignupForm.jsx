@@ -118,7 +118,7 @@ const SignupForm = ({
                             onChange={handleInputChange}
                             required
                             disabled={!codeSent}
-                            maxLength="4"
+                            maxLength="6"
                         />
                         <button
                             type="button"

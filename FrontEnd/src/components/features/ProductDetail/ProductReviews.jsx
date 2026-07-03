@@ -39,7 +39,7 @@ const ProductReviews = ({ reviews }) => {
                                         <div className="review-images">
                                             {review.images.map((img, idx) => (
                                                 <div key={idx} className="review-image-thumbnail">
-                                                    <img src={`/media/${img}`} alt={`Review ${idx}`} onError={(e) => e.target.style.display = 'none'} />
+                                                    <img src={`http://localhost:8085${img}`} alt={`Review ${idx}`} onError={(e) => e.target.style.display = 'none'} />
                                                 </div>
                                             ))}
                                         </div>

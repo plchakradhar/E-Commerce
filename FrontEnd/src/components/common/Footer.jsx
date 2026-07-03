@@ -53,15 +53,15 @@ const Footer = () => {
           <div className="contact-info">
             <div className="contact-item">
               <FaMapMarkerAlt className="contact-icon" />
-              <span>123 Fashion Street, Style City</span>
+              <span>KL University, Guntur</span>
             </div>
             <div className="contact-item">
               <FaPhone className="contact-icon" />
-              <span>+1 (555) 123-4567</span>
+              <span>+91 9398429136</span>
             </div>
             <div className="contact-item">
               <FaEnvelope className="contact-icon" />
-              <span>hello@genzfits.com</span>
+              <span>contact@genzfits.com</span>
             </div>
           </div>
         </motion.div>

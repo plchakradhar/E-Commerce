@@ -3,6 +3,7 @@ import axios from 'axios';
 import { FaCheckCircle, FaTimes, FaUndo, FaFileInvoice, FaTruck } from 'react-icons/fa';
 import '../../styles/pages/adminpage.css';
 import { orderAPI } from '../../utils/api';
+import { generatePDFInvoice } from '../../utils/pdfGenerator';
 
 const AdminReturns = ({ orders, onUpdate }) => {
     // Filter for return-related orders
@@ -15,20 +16,14 @@ const AdminReturns = ({ orders, onUpdate }) => {
     const handleAction = async (orderId, newStatus) => {
         try {
             setProcessingId(orderId);
-            // Determine endpoints based on action for more granularity if needed, 
-            // but simpler to use generic status update for now since DB logic handles dates trigger? 
-            // Wait, backend logic for dates is implementation specific. 
-            // Let's assume generic status update for now as per plan or use return endpoint if expanded. 
-            // Actually Controller doesn't have specific "confirm return" endpoint logic shown, just generic return. 
-            // So we will use updateStatus and assume backend or just visual update for now.
-
-            // REAL WORLD: Backend would set specific dates on specific status transitions.
-            // FOR DEMO: We just update status text.
-
-            await orderAPI.updateStatus(orderId, newStatus);
+            await axios.put(`http://localhost:8085/api/admin/orders/${orderId}`,
+                { status: newStatus },
+                { withCredentials: true }
+            );
             onUpdate();
         } catch (error) {
             console.error("Action failed", error);
+            alert("Action failed. See console.");
         } finally {
             setProcessingId(null);
         }
@@ -88,68 +83,56 @@ const AdminReturns = ({ orders, onUpdate }) => {
                                         <td>{getStatusBadge(order.status)}</td>
                                         <td>{new Date(order.returnRequestDate || order.updatedAt).toLocaleDateString()}</td>
                                         <td>
-                                            <div className="action-buttons">
-                                                {order.status === 'return_requested' && (
-                                                    <button
-                                                        className="btn-icon confirm"
-                                                        title="Confirm Return"
-                                                        disabled={processingId === order.id}
-                                                        onClick={() => handleAction(order.id, 'return_confirmed')}
-                                                    >
-                                                        <FaCheckCircle /> Confirm
-                                                    </button>
-                                                )}
-
-                                                {order.status === 'return_confirmed' && (
-                                                    <button
-                                                        className="btn-icon edit"
-                                                        title="Schedule Pickup"
-                                                        disabled={processingId === order.id}
-                                                        onClick={() => handleAction(order.id, 'pickup_scheduled')}
-                                                    >
-                                                        <FaTruck /> Pickup
-                                                    </button>
-                                                )}
-
-                                                {order.status === 'pickup_scheduled' && (
-                                                    <button
-                                                        className="btn-icon success"
-                                                        title="Process Refund"
-                                                        disabled={processingId === order.id}
-                                                        onClick={() => handleAction(order.id, 'refunded')}
-                                                    >
-                                                        <FaFileInvoice /> Refund
-                                                    </button>
-                                                )}
-                                            </div>
+                                            <select
+                                                value={order.status}
+                                                onChange={(e) => handleAction(order.id, e.target.value)}
+                                                className={`status-select ${order.status}`}
+                                                disabled={processingId === order.id}
+                                            >
+                                                <option value="return_requested">Requested</option>
+                                                <option value="return_confirmed">Confirmed</option>
+                                                <option value="pickup_scheduled">Pickup Scheduled</option>
+                                                <option value="returned">Picked</option>
+                                                <option value="refunded">Refunded</option>
+                                            </select>
                                         </td>
                                     </tr>
                                     <tr className="return-row-details">
                                         <td colSpan="6">
-                                            <div className="return-details-expand">
-                                                <div className="detail-section">
-                                                    <h4>Shipping Address</h4>
-                                                    <p>{order.shippingInfo?.address}</p>
-                                                    <p>{order.shippingInfo?.city}, {order.shippingInfo?.state} - {order.shippingInfo?.zipCode}</p>
-                                                    {order.shippingInfo?.landmark && <p>Landmark: {order.shippingInfo?.landmark}</p>}
+                                            <div className="unified-details-card">
+                                                <div className="unified-header">
+                                                    <h3>Order Details</h3>
+                                                    <button className="btn-download-invoice" onClick={() => generatePDFInvoice(order)}>
+                                                        <FaFileInvoice /> Download Invoice
+                                                    </button>
                                                 </div>
-                                                <div className="detail-section">
-                                                    <h4>Order Items</h4>
-                                                    <ul className="mini-item-list">
-                                                        {order.items?.map((item, idx) => (
-                                                            <li key={idx}>
-                                                                <span>{item.productName} (x{item.quantity})</span>
-                                                                <span>{item.selectedSize ? `Size: ${item.selectedSize}` : ''}</span>
-                                                                <span>₹{item.price}</span>
-                                                            </li>
-                                                        ))}
-                                                    </ul>
-                                                </div>
-                                                <div className="detail-section invoice-section">
-                                                    <h4>Invoice Details</h4>
-                                                    <div className="invoice-row"><span>Subtotal:</span> <span>₹{order.total}</span></div>
-                                                    <div className="invoice-row"><span>Payment:</span> <span>{order.paymentMethod?.toUpperCase()}</span></div>
-                                                    <div className="invoice-row total"><span>Total Refund:</span> <span>₹{order.total}</span></div>
+                                                <div className="unified-grid">
+                                                    <div className="detail-section">
+                                                        <h4>Shipping Address</h4>
+                                                        <p>{order.shippingInfo?.fullName}</p>
+                                                        <p>{order.shippingInfo?.address}</p>
+                                                        <p>{order.shippingInfo?.city}, {order.shippingInfo?.state} - {order.shippingInfo?.zipCode}</p>
+                                                        <p>{order.shippingInfo?.phone}</p>
+                                                        {order.shippingInfo?.landmark && <p>Landmark: {order.shippingInfo?.landmark}</p>}
+                                                    </div>
+                                                    <div className="detail-section">
+                                                        <h4>Order Items</h4>
+                                                        <ul className="mini-item-list">
+                                                            {order.items?.map((item, idx) => (
+                                                                <li key={idx}>
+                                                                    <span>{item.productName} (x{item.quantity})</span>
+                                                                    <span>{item.selectedSize ? `Size: ${item.selectedSize}` : ''}</span>
+                                                                    <span>₹{item.price}</span>
+                                                                </li>
+                                                            ))}
+                                                        </ul>
+                                                    </div>
+                                                    <div className="detail-section invoice-section">
+                                                        <h4>Invoice Details</h4>
+                                                        <div className="invoice-row"><span>Subtotal:</span> <span>₹{order.total}</span></div>
+                                                        <div className="invoice-row"><span>Payment:</span> <span>{order.paymentMethod?.toUpperCase()}</span></div>
+                                                        <div className="invoice-row total"><span>Total Refund:</span> <span>₹{order.total}</span></div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </td>

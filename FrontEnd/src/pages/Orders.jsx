@@ -10,7 +10,7 @@ import '../styles/pages/Orders.css';
 import { FaSearch, FaFilter, FaBox, FaCheckCircle, FaTruck, FaUndo, FaTimesCircle, FaMoneyBillWave } from 'react-icons/fa';
 import { orderAPI, authAPI } from "../utils/api";
 import { getImageUrl } from "../utils/imageUtils";
-import { formatDate, formatCurrency, getOrderStatusStep, getStatusBadgeColor, getEstimatedDeliveryDate } from "../utils/helpers";
+import { formatDate, formatCurrency, getOrderStatusStep, getStatusBadgeColor, getEstimatedDeliveryDate, formatExactDeliveryDate } from "../utils/helpers";
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);
@@ -318,7 +318,7 @@ const Orders = () => {
                             <span className="delivery-est-text">
                               {isCancelled ? '' :
                                 isReturnFlow ? '' :
-                                  step === 4 ? `Delivered on ${getEstimatedDeliveryDate(order.createdAt, 'delivered')}` :
+                                  step === 4 ? `Delivered on ${formatExactDeliveryDate(order.deliveredDate || order.updatedAt || order.createdAt)}` :
                                     `Arriving by ${getEstimatedDeliveryDate(order.createdAt)}`}
                             </span>
                           </div>

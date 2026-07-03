@@ -318,7 +318,15 @@ const Home = () => {
     </div>
   );
 
-  const categories = ["T-Shirts", "Shirts", "Hoodies", "Formals", "Casuals", "Party Wear", "Trending"];
+  const categoryData = [
+    { name: "T-Shirts", image: "https://images.pexels.com/photos/428338/pexels-photo-428338.jpeg?auto=compress&cs=tinysrgb&w=500" },
+    { name: "Shirts", image: "https://images.pexels.com/photos/297933/pexels-photo-297933.jpeg?auto=compress&cs=tinysrgb&w=500" },
+    { name: "Hoodies", image: "https://images.pexels.com/photos/1183266/pexels-photo-1183266.jpeg?auto=compress&cs=tinysrgb&w=500" },
+    { name: "Formals", image: "https://images.pexels.com/photos/1043474/pexels-photo-1043474.jpeg?auto=compress&cs=tinysrgb&w=500" },
+    { name: "Casuals", image: "https://images.pexels.com/photos/846741/pexels-photo-846741.jpeg?auto=compress&cs=tinysrgb&w=500" },
+    { name: "Party Wear", image: "https://images.pexels.com/photos/1040881/pexels-photo-1040881.jpeg?auto=compress&cs=tinysrgb&w=500" },
+    { name: "Trending", image: "https://images.pexels.com/photos/837140/pexels-photo-837140.jpeg?auto=compress&cs=tinysrgb&w=500" }
+  ];
 
   return (
     <div className="home-page">
@@ -360,16 +368,16 @@ const Home = () => {
       {coinsModalOpen && <CoinsModal />}
 
       <div className="category-bar">
-        {categories.map(category => (
+        {categoryData.map(category => (
           <motion.button
-            key={category}
+            key={category.name}
             className="category-item"
-            onClick={() => handleCategoryClick(category)}
+            onClick={() => handleCategoryClick(category.name)}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <img src={tshirtImg} alt={category} />
-            <span>{category}</span>
+            <img src={category.image} alt={category.name} />
+            <span>{category.name}</span>
           </motion.button>
         ))}
       </div>
